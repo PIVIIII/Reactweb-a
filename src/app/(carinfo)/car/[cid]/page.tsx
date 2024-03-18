@@ -1,25 +1,30 @@
 import Image from "next/image"
-export default function CarDetailPage( {params} : { params : {cid:string} } ) {
-    /**
-     * Mock Data
-     */
+import getCar from "@/libs/getCar"
+export default async function CarDetailPage( {params} : { params : {cid:string} } ) {
+    const carDetail = await getCar(params.cid)
 
-    const mockCarRepo = new Map()
+    /*const mockCarRepo = new Map()
     mockCarRepo.set("001", {name:"Honda Civic",image:"/img/civic.jpg"})
     mockCarRepo.set("002", {name:"Honda Accord",image:"/img/accord.jpg"})
     mockCarRepo.set("003", {name:"Toyota Forture",image:"/img/fortuner.jpg"})
-    mockCarRepo.set("004", {name:"Tesla Model 3",image:"/img/tesla.jpg"})
+    mockCarRepo.set("004", {name:"Tesla Model 3",image:"/img/tesla.jpg"})*/
     
     
     return (
         <main className="text-center p-5">
-            <h1 className="text-lg font-medium">Car ID {params.cid}</h1>
+            <h1 className="text-lg font-medium">{carDetail.data.model}</h1>
             <div className="flex flex-row my-5">
-                <Image src={ (mockCarRepo.get(params.cid)).image }
+                <Image src={ carDetail.data.picture }
                     alt='Car Image'
                     width={0} height={0} sizes="100vw"
                     className="rounded-lg w-[30%]"/>
-                <div className="text-md mx-5">{ (mockCarRepo.get(params.cid)).name }</div>                    
+                <div className="text-md mx-5 text-left">{ carDetail.data.description }
+                <div className="text-md mx-5">Doors: { carDetail.data.doors }</div>
+                <div className="text-md mx-5">Seats: { carDetail.data.seats }</div>
+                <div className="text-md mx-5">Large Bags: { carDetail.data.largebags }</div>
+                <div className="text-md mx-5">Small Bags{ carDetail.data.smallbags }</div>
+                <div className="text-md mx-5">Daily Rental Rate: { carDetail.data.dayRate }(insurance included)</div>
+                </div>                    
             </div>
         </main>
     )
