@@ -20,11 +20,11 @@ export default async function Topmenu() {
             <TopMenuItem title='Cart' pageRef='/cart'/>
             {
                 session? <Link href="api/auth/signout">
-                    <div className='flex items-center h-full px-2 text-cyan-600 text-sm'>Sigh-Out of {session.user?.name}</div>
+                    <div className='flex items-center h-full px-2 text-cyan-600 text-sm'>Sign-Out of {session.user?.name}</div>
                 </Link>
                 :  <Link href="api/auth/signin">
                     <div className='flex items-center h-full px-2 text-cyan-600 text-sm'>
-                    Sigh-In</div>
+                    Sign-In</div>
                 </Link>
             } 
             </div>        
